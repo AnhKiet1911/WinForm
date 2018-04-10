@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QuanLyThuVien" Class="QuanLyThuVienDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=AK-PC;Initial Catalog=QuanLyThuVien;Integrated Security=True" SettingsObjectName="LTUDQL.Properties.Settings" SettingsPropertyName="QuanLyThuVienConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Anh" Member="Anhs">
+    <Type Name="Anh">
+      <Column Name="IdNguoiDung" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Images" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Anh_TaiKhoan" Member="TaiKhoan" ThisKey="IdNguoiDung" OtherKey="IdNguoiDung" Type="TaiKhoan" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CaiDat" Member="CaiDats">
+    <Type Name="CaiDat">
+      <Column Name="i" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TuoiMuonSach" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HanSuDungThe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayMuonToiDa" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SoLuongSachMuonToiDa" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ChiTietMuonSach" Member="ChiTietMuonSaches">
+    <Type Name="ChiTietMuonSach">
+      <Column Name="IdPhieu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MaMuon" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="MaSach" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SoTT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="PhieuMuonSach_ChiTietMuonSach" Member="PhieuMuonSach" ThisKey="MaMuon" OtherKey="MaMuon" Type="PhieuMuonSach" IsForeignKey="true" />
+      <Association Name="Sach_ChiTietMuonSach" Member="Sach" ThisKey="MaSach" OtherKey="MaSach" Type="Sach" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DocGia" Member="DocGias">
+    <Type Name="DocGia">
+      <Column Name="IdDocGia" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenDocGia" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NgaySinh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CMND" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="GioiTinh" Type="System.String" DbType="NVarChar(3)" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SDT" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="LoaiDocGia" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NgayLap" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="MaPhieu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="LapPhieu_DocGia" Member="LapPhieu" ThisKey="MaPhieu" OtherKey="MaPhieu" Type="LapPhieu" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PhieuMuonSach" Member="PhieuMuonSaches">
+    <Type Name="PhieuMuonSach">
+      <Column Name="MaMuon" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NgayMuon" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaPhieu" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="PhieuMuonSach_ChiTietMuonSach" Member="ChiTietMuonSaches" ThisKey="MaMuon" OtherKey="MaMuon" Type="ChiTietMuonSach" />
+      <Association Name="LapPhieu_PhieuMuonSach" Member="LapPhieu" ThisKey="MaPhieu" OtherKey="MaPhieu" Type="LapPhieu" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sach" Member="Saches">
+    <Type Name="Sach">
+      <Column Name="MaSach" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenSach" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NamXuatBan" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="NhaXuatBan" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="NgayVaoKho" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TheLoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TenTacGia" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Association Name="Sach_ChiTietMuonSach" Member="ChiTietMuonSaches" ThisKey="MaSach" OtherKey="MaSach" Type="ChiTietMuonSach" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TempTable_MuonSach" Member="TempTable_MuonSaches">
+    <Type Name="TempTable_MuonSach">
+      <Column Name="STT" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Sach" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TheLoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TacGia" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="MaSach" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TaiKhoan" Member="TaiKhoans">
+    <Type Name="TaiKhoan">
+      <Column Name="IdNguoiDung" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PassND" Type="System.String" DbType="Char(32) NOT NULL" CanBeNull="false" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(80) NOT NULL" CanBeNull="false" />
+      <Column Name="NgaySinh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GioiTinh" Type="System.String" DbType="NVarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="SoDT" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Association Name="TaiKhoan_LapPhieu" Member="LapPhieus" ThisKey="IdNguoiDung" OtherKey="IdNguoiLap" Type="LapPhieu" />
+      <Association Name="Anh_TaiKhoan" Member="Anh" ThisKey="IdNguoiDung" OtherKey="IdNguoiDung" Type="Anh" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LapPhieu" Member="LapPhieus">
+    <Type Name="LapPhieu">
+      <Column Name="MaPhieu" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdNguoiLap" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="LapPhieu_DocGia" Member="DocGias" ThisKey="MaPhieu" OtherKey="MaPhieu" Type="DocGia" />
+      <Association Name="LapPhieu_PhieuMuonSach" Member="PhieuMuonSaches" ThisKey="MaPhieu" OtherKey="MaPhieu" Type="PhieuMuonSach" />
+      <Association Name="TaiKhoan_LapPhieu" Member="TaiKhoan" ThisKey="IdNguoiLap" OtherKey="IdNguoiDung" Type="TaiKhoan" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
